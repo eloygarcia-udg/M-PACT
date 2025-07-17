@@ -4,26 +4,12 @@ import argparse
 
 terms = {'ID':'Patient ID or image name','use_csv':'Use csv file', 'BV':'Breast Volume (cm3)', 'V':'Mammography projection',
          'F':'Compression Force (N)', 'T':'Recorded Breast Thickness (cm)', 'S':'Sigma threshold for classification',
-         'vis':'Visualization'}
-
-"""
-# First parse the deciding arguments.
-deciding_args_parser = argparse.ArgumentParser(add_help=False)
-deciding_args_parser.add_argument(
-    '--argument', required=False, action='store_true')
-deciding_args, _ = deciding_args_parser.parse_known_args()
-
-# Create the main parser with the knowledge of the deciding arguments.
-parser = argparse.ArgumentParser(
-    description='...', parents=[deciding_args_parser])
-parser.add_argument('-a', required=deciding_args.argument)
-parser.add_argument('-b', required=deciding_args.argument)
-arguments = parser.parse_args()
-"""
+         'vis':'Visualization','output':'Output file'}
 
 def csv_parser(parser):
     #parser = argparse.ArgumentParser(description="MPACT: Mammography Pressure and Compression tracking for Quality Control (v.0.1)")
     parser.add_argument('--use_csv', dest='use_csv', type=str, help='File path', required=True)
+    parser.add_argument('--outputfile', '-o', dest='output', type=str, help='File path', required=True)
 
     parser.add_argument('--Sigma', '-S', dest='S', type=float, default=2,
                         help='Sigma Threshold (default:2)')
@@ -35,6 +21,7 @@ def csv_parser(parser):
 def terminal_parser(parser):
     #parser = argparse.ArgumentParser(description="MPACT: Mammography Pressure and Compression tracking for Quality Control (v.0.1)")
     parser.add_argument('--PatientID', '-ID', dest='ID', type=str, help='Patient ID or image name')
+    parser.add_argument('--outputfile', '-o', dest='output', default = None, type=str, help='File path')
 
     ## Required
     parser.add_argument('--BreastVolume', '-BV', dest='BV', type=int,
