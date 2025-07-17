@@ -31,8 +31,6 @@ def visualization(BV, col):
         ax.set_xlabel("Breast Volume / Compression Force (cm³ / N)")
     plt.show()
 
-
-
 def compute_thickness(BV, V, F, sigma):
     sd = 0 ## initializing
     T = 0 ## initializing
@@ -61,7 +59,7 @@ def compute_thickness(BV, V, F, sigma):
     return T, Tmin, Tmax, sd
 
 
-def MPACT(BV, view, Force=None, sigma=2, Thickness=None):
+def MPACT(BV, view, Force=None, Thickness=None, sigma=2):
     if (BV <102.10) or (BV > 1933.59):
         print("")
         print("Breast volume out of range. Expected values between [102.10, 1933.59] cm³")
@@ -86,7 +84,7 @@ def MPACT(BV, view, Force=None, sigma=2, Thickness=None):
             classification = 'Potentially overcompressed'
             col = 'red'
         elif Sscore>2.0:
-            print(f"Recorded thickness is larger than the expected maximum: {np.round(args.T, 2)} > {np.round(Tmax, 2)}")
+            print(f"Recorded thickness is larger than the expected maximum: {np.round(Thickness, 2)} > {np.round(Tmax, 2)}")
             classification = 'Potentially overcompressed'
             col ='blue'
 
@@ -103,7 +101,9 @@ if __name__=='__main__':
         infodoc = pd.read_csv(args.use_csv)
         for index, row in infodoc.iterrows():
             print(row['PatientID'])
-            MPACT(row['BreastVolumeCm3'], row['View'], row['CompressionForceN'])
+            MPACT(row['BreastVolumeCm3'], row['View'], row['CompressionForceN'], row['ThicknessCm'])
+    else:
+        MPACT(args.BV, args.V, args.F, args.T, args.S)
     """
     if (not Thickness==None) and args.vis:
         visualization(args, col)

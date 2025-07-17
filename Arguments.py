@@ -73,7 +73,6 @@ def get_args():
 
     print("Arguments:")
     for arg in vars(args):
-        print(arg)
         if not getattr(args, arg)==None:
             print(f"\t{terms[arg]}: {getattr(args, arg)}")
 
