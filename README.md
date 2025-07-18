@@ -33,6 +33,7 @@ and standardized compression approach)
 The software offers two operating modes: prediction and evaluation.
 
 </div>
+
 ## M-PACT - Prediction mode
 
 In prediction mode, the user provides the patient breast volume (BV) and mammographic view as input, and the software
