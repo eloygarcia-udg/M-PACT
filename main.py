@@ -68,14 +68,14 @@ def main():
                 data = MPACT(row['BreastVolumeCm3'], row['MammographyView'], F, T, args.S, msg)
                 # data = [ T, Tmin, Tmax, classification, Sscore]
 
-                Thickness_results.append(data[0])
-                ThicknessMin_results.append(data[1])
-                ThicknessMax_results.append(data[2])
+                Thickness_results.append(np.round(data[0],2))
+                ThicknessMin_results.append(np.round(data[1],2))
+                ThicknessMax_results.append(np.round(data[2],2))
                 Errors_results.append(msg)
 
                 if ('ThicknessCm' in infodoc.columns):
                     Classification_results.append(data[3])
-                    Sscore_results.append(data[4])
+                    Sscore_results.append(np.round(data[4],4))
 
         else:
             print("M-PACT csv requires of, at least, columns 'PatientID','BreastVolumeCm3', and 'MammographyView' ")
@@ -98,14 +98,14 @@ def main():
         data = MPACT(args.BV, args.V, args.F, args.T, args.S, msg)
 
         ## Results
-        Thickness_results.append(data[0])
-        ThicknessMin_results.append(data[1])
-        ThicknessMax_results.append(data[2])
+        Thickness_results.append(np.round(data[0],2))
+        ThicknessMin_results.append(np.round(data[1],2))
+        ThicknessMax_results.append(np.round(data[2],2))
         Errors_results.append(msg)
 
         if not args.T==None:
             Classification_results.append(data[3])
-            Sscore_results.append(data[4])
+            Sscore_results.append(np.round(data[4],4))
 
     """
         Saving results into a .csv file 
