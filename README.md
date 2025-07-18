@@ -99,8 +99,6 @@ Expected Thickness: 6.237 cm
 Expected Thickness range: [5.24, 7.23] cm
 ```
 
-Note that values out of range in both BV and compression force may obtain weird results.
-
 The expected thickness range can also be modified by changing the *sigma threshold*. Using $\sigma=2$ we are obtaining a 
 two standard deviations thickness range calculated from the residual errors. However, if you are interested on using a
 custom standard deviation range, it can be modified by including ```--Sigma``` or ```-S``` 
@@ -204,5 +202,32 @@ than the input one to avoid overwriting the document.
 > python main.py --use_csv ~/M-PACT/test.csv --outputfile ~/M-PACT/output.csv
 ```
 
-Furthermore, we included an option to visualize the processed data (just in the evaluation mode) into the expected 
-distribution.  
+Furthermore, we provide an option to visualize the processed data (just in the evaluation mode) into the expected 
+distribution, as follows:
+
+```commandline
+> python main.py --use_csv ~/M-PACT/test.csv --outputfile ~/M-PACT/output.csv --visualization
+```
+obtaining the following figure:
+
+![alt text](./images/Figure_1.png)
+
+
+As shown, compressed breast thickness (cm) is presented against the volume divided
+by the compression force (cm3/N) for both CC and MLO compressions. Green and red shaded areas represent the boundaries
+of the normal distribution of the residual errors with two and three standard deviations. Therefore, green points 
+represent values within the normal range, while blue and red points corresponds to potentially undercompressed and 
+overcompressed mammograms, respectively.  Values out of range in both BV (from $102.10$ to $1933.59~cm^3$) and
+compression force (between $50$ and $200~N$) may obtain incorrect results which may yield to a wrong representation.
+
+## Reference
+
+````commandline
+@article{Garcia,
+    title     = {M-PACT: A mechanics based toolkit to evaluate breast compression in mammography and DBT},
+    author    = {E. Garc\'a and A. Oliver and J. Mar\'i and R. Mart\'i},
+    year      = {2025},
+    url       = {https://github.com/eloygarcia-udg/M-PACT}
+}
+
+````

@@ -1,7 +1,7 @@
-PatientID,MammographyView,BreastVolumeCm3,CompressionForceN,RecordedThicknessCm,ExpectedThicknessCm,MinThicknessIntervalCm,MaxThicknessIntervalCm,S-score,Classification,Messages
-A_001,CC,100,25,2,5.09,4.2756,5.9044,-7.588408644400785,Potentially overcompressed,"['Breast volume out of range. Expected values between [102.10, 1933.59] cm³', 'Compression Force out of range. Expected forces in range [50, 200] N']"
-A_002,MLO,300,35,3,6.865522407052816,5.629728373783309,8.101316440322321,-6.2559331134265275,Potentially overcompressed,"['Compression Force out of range. Expected forces in range [50, 200] N']"
-A_003,CC,500,150,5,4.746711460950591,3.987237627198496,5.506185294702685,0.6670105744079837,Within the normal range,[]
-A_004,MLO,1000,200,6,5.579086438149609,4.57485087928268,6.583321997016538,0.8382765540095073,Within the normal range,[]
-A_005,CC,1500,250,8,5.975494793282861,5.0194156263576035,6.931573960208119,4.235015837083722,Potentially undercompressed,"['Compression Force out of range. Expected forces in range [50, 200] N']"
-A_006,MLO,1500,250,8,5.976050921576711,4.900361755692903,7.0517400874605185,3.7630742088219726,Potentially undercompressed,"['Compression Force out of range. Expected forces in range [50, 200] N']"
+PatientID,MammographyView,BreastVolumeCm3,RecordedThicknessCm,ExpectedThicknessCm,MinThicknessIntervalCm,MaxThicknessIntervalCm,S-score,Classification,Messages
+BCT_16006_095,CC,100.0,2.31868700494649,2.0853613484183793,1.714167028399908,2.4565556684368506,1.257161782629109,Within the normal range,"['Breast volume out of range. Expected values between [102.10, 1933.59] cm³']"
+BCT_16006_034,MLO,340.658411771223,4.27673774234109,3.9139516345447047,3.131161307635764,4.696741961453646,0.9269049330973311,Within the normal range,[]
+BCT_16006_019,CC,463.398029898804,4.86843732771818,4.681193537406968,3.847941087748528,5.514445987065408,0.44942871848253196,Within the normal range,[]
+BCT_16006_031,MLO,647.649180057789,5.46550518727634,5.265550323006725,4.21244025840538,6.31866038760807,0.37974162623791446,Within the normal range,[]
+BCT_16006_042,CC,1569.33808572423,6.67463677753056,6.953518920835251,5.715792552926576,8.191245288743925,-0.4506361834658231,Within the normal range,[]
+BCT_16006_043,MLO,2000.0,6.67463677753056,8.09755295511776,6.4780423640942075,9.717063546141311,-1.757217501971256,Within the normal range,"['Breast volume out of range. Expected values between [102.10, 1933.59] cm³']"

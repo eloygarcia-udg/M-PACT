@@ -8,8 +8,52 @@ from Arguments import get_args
 
 global msg
 
+def one_view (df):
+    view = np.unique(np.unique(df['MammographyView']))[0]
 
-def visualization(df):
+    fig, ax = plt.subplots()
+
+    colours = np.array(['green']*len(df.index))
+    colours[df['S-score'] < -2.0] = 'red'
+    colours[df['S-score'] > 2.0] = 'blue'
+
+    if not 'CompressionForceN' in df.columns:
+        bv = np.arange(102., 2000, 10)
+        t2_vis, t2min_vis, t2max_vis, sdim = compute_thickness(bv, view, None, 2)
+        t3_vis, t3min_vis, t3max_vis, sdim = compute_thickness(bv, view, None, 3)
+
+        ax.plot(bv, t2_vis)
+        ax.fill_between(bv, t3min_vis, t3max_vis, alpha=0.4, facecolor='red')
+        ax.fill_between(bv, t2min_vis, t2max_vis, alpha=0.4, facecolor='green')
+
+        ax.scatter(df['BreastVolumeCm3'], df['RecordedThicknessCm'], color=colours)
+        for idx, row in df.iterrows():
+            ax.text(25+row['BreastVolumeCm3'], 0.15+row['RecordedThicknessCm'], row['PatientID'],
+                       horizontalalignment='center', verticalalignment='bottom')
+        ax.title.set_text(f"Mammography view {view}")
+        ax.set_ylabel("Thickness (cm)")
+        ax.set_xlabel("Breast Volume (cm³)")
+    else:
+        bv = np.arange(102., 2000, 10)
+        cf = np.arange(0.5, 12.0, 11.5/len(bv))
+
+        t2_vis, t2min_vis, t2max_vis, sdim = compute_thickness(bv, vi, bv/cf, 2)
+        t3_vis, t3min_vis, t3max_vis, sdim = compute_thickness(bv, vi, bv/cf, 3)
+
+        ax.plot(cf, t2_vis)
+        ax.fill_between(cf, t3min_vis, t3max_vis, alpha=0.4, facecolor='red')
+        ax.fill_between(cf, t2min_vis, t2max_vis, alpha=0.4, facecolor='green')
+
+        ax.scatter(df['BreastVolumeCm3'] / df['CompressionForceN'], df['RecordedThicknessCm'], color=colours)
+        for idx, row in df.iterrows():
+            ax.text(row['BreastVolumeCm3'] / row['CompressionForceN'], 0.15+row['RecordedThicknessCm'], row['PatientID'],
+                       horizontalalignment='center', verticalalignment='bottom')
+        ax.title.set_text(f"Mammography view {view}")
+        ax.set_ylabel("Thickness (cm)")
+        ax.set_xlabel("Breast Volume / Compression Force (cm³ / N)")
+    plt.show()
+
+def two_views(df):
     views = np.unique(df['MammographyView'])
 
     fig, ax = plt.subplots(ncols=len(views))
@@ -57,6 +101,13 @@ def visualization(df):
             ax[i].set_ylabel("Thickness (cm)")
             ax[i].set_xlabel("Breast Volume / Compression Force (cm³ / N)")
     plt.show()
+
+def visualization(df):
+    views = np.unique(df['MammographyView'])
+    if len(views)==1:
+        one_view(df)
+    else:
+        two_views(df)
 
 
 def compute_thickness(BV, V, F, sigma):
