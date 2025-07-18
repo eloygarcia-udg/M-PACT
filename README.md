@@ -6,7 +6,6 @@
 breast compression in mammography and DBT" **(currently under review)**
 
 ## Overview
-<div style="text-align: justify;">
 
 Breast compression plays a critical role in mammography and digital breast tomosynthesis (DBT),
 improving image quality while reducing radiation dose and tissue superposition.
@@ -31,8 +30,6 @@ decision support, offering a standardized and reproducible method to monitor and
 and standardized compression approach)
 
 The software offers two operating modes: prediction and evaluation.
-
-</div>
 
 ## M-PACT - Prediction mode
 

@@ -1,6 +1,7 @@
 import sys
 import argparse
 
+global msg
 
 terms = {'ID':'Patient ID or image name','use_csv':'Use csv file', 'BV':'Breast Volume (cm3)', 'V':'Mammography projection',
          'F':'Compression Force (N)', 'T':'Recorded Breast Thickness (cm)', 'S':'Sigma threshold',
