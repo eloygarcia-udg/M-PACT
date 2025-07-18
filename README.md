@@ -1,5 +1,4 @@
 # M-PACT: Mammography Pressure and Compression tracking for Quality Control
-<div style="text-align: justify;">
 
 >:warning: **This is a preliminary version of the M-PACT software! (only for revision)**
 > 
@@ -7,6 +6,7 @@
 breast compression in mammography and DBT" **(currently under review)**
 
 ## Overview
+<div style="text-align: justify;">
 
 Breast compression plays a critical role in mammography and digital breast tomosynthesis (DBT),
 improving image quality while reducing radiation dose and tissue superposition.
@@ -32,7 +32,7 @@ and standardized compression approach)
 
 The software offers two operating modes: prediction and evaluation.
 
-
+</div>
 ## M-PACT - Prediction mode
 
 In prediction mode, the user provides the patient breast volume (BV) and mammographic view as input, and the software
@@ -232,4 +232,3 @@ compression force (between 50 and 200 N) may obtain incorrect results which may 
 }
 
 ````
-</div>
