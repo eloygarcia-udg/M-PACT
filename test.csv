@@ -1,0 +1,7 @@
+PatientID,BreastVolumeCm3,ThicknessCm,CompressionForceN,MammographyView
+A_001,100,2,25,CC
+A_002,300,3,35,MLO
+A_003,500,5,150,CC
+A_004,1000,6,200,MLO
+A_005,1500,8,250,CC
+A_006,1500,8,250,MLO

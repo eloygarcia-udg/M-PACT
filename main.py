@@ -1,8 +1,6 @@
 import os
-
-import numpy
-import pandas as pd
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 import warnings
 
@@ -35,7 +33,8 @@ def visualization(df):
 
             ax[i].scatter(temp_df['BreastVolumeCm3'], temp_df['RecordedThicknessCm'], color=colours)
             for idx, row in temp_df.iterrows():
-                ax[i].text(row['BreastVolumeCm3'], row['RecordedThicknessCm'], row['PatientID'])
+                ax[i].text(25+row['BreastVolumeCm3'], 0.15+row['RecordedThicknessCm'], row['PatientID'],
+                           horizontalalignment='center', verticalalignment='bottom')
             ax[i].title.set_text(f"Mammography view {vi}")
             ax[i].set_ylabel("Thickness (cm)")
             ax[i].set_xlabel("Breast Volume (cm³)")
@@ -43,7 +42,7 @@ def visualization(df):
             bv = np.arange(102., 2000, 10)
             cf = np.arange(0.5, 12.0, 11.5/len(bv))
 
-            t2_vis, t2min_vis, t2max_vis, sdim = compute_thickness(bv, vi,bv/cf, 2)
+            t2_vis, t2min_vis, t2max_vis, sdim = compute_thickness(bv, vi, bv/cf, 2)
             t3_vis, t3min_vis, t3max_vis, sdim = compute_thickness(bv, vi, bv/cf, 3)
 
             ax[i].plot(cf, t2_vis)
@@ -52,7 +51,8 @@ def visualization(df):
 
             ax[i].scatter(temp_df['BreastVolumeCm3'] / temp_df['CompressionForceN'], temp_df['RecordedThicknessCm'], color=colours)
             for idx, row in temp_df.iterrows():
-                ax[i].text(row['BreastVolumeCm3'] / row['CompressionForceN'], row['RecordedThicknessCm'], row['PatientID'])
+                ax[i].text(row['BreastVolumeCm3'] / row['CompressionForceN'], 0.15+row['RecordedThicknessCm'], row['PatientID'],
+                           horizontalalignment='center', verticalalignment='bottom')
             ax[i].title.set_text(f"Mammography view {vi}")
             ax[i].set_ylabel("Thickness (cm)")
             ax[i].set_xlabel("Breast Volume / Compression Force (cm³ / N)")
@@ -63,7 +63,7 @@ def compute_thickness(BV, V, F, sigma):
     sd = 0 ## initializing
     T = 0 ## initializing
 
-    if (type(F)==numpy.ndarray) or (F==None):
+    if (type(F)==np.ndarray) or (F==None):
         if V == 'CC':
             sd = 0.089
             T = (0.60 * BV/(0.073 * BV+36.01) )+ 0.70
@@ -71,8 +71,8 @@ def compute_thickness(BV, V, F, sigma):
             sd = 0.10
             T = (0.66 * BV / (0.064 *  BV + 74.53)) + 1.58
     else:
-        if (F < 50) or (F > 220):
-            msg.append("Compression Force out of range. Expected forces in range [50, 220] N")
+        if (F < 50) or (F > 200):
+            msg.append("Compression Force out of range. Expected forces in range [50, 200] N")
             print("")
             print(msg[-1])
 
@@ -110,13 +110,13 @@ def MPACT(BV, view, Force=None, Thickness=None, sigma=2):
 
         classification = 'Within the normal range'
         if Sscore<-2.0:
-            msg.append("Recorded thickness is smaller than the expected minimum")
+            #msg.append("Recorded thickness is smaller than the expected minimum")
             print(f"Recorded thickness is smaller than the expected minimum: {np.round(Thickness,2)} < {np.round(Tmin,2)}")
             classification = 'Potentially overcompressed'
         elif Sscore>2.0:
-            msg.append("Recorded thickness is larger than the expected maximum")
+            #msg.append("Recorded thickness is larger than the expected maximum")
             print(f"Recorded thickness is larger than the expected maximum: {np.round(Thickness, 2)} > {np.round(Tmax, 2)}")
-            classification = 'Potentially overcompressed'
+            classification = 'Potentially undercompressed'
         print(classification)
 
     print("")
@@ -160,7 +160,7 @@ def main():
             Running the M-PACT core using a csv file
         """
         infodoc = pd.read_csv(args.use_csv)
-        if {'PatientID','BreastVolumeCm3','View'}.issubset(infodoc.columns):
+        if {'PatientID','BreastVolumeCm3','MammographyView'}.issubset(infodoc.columns):
             for index, row in infodoc.iterrows():
                 global msg
                 msg = []
@@ -168,7 +168,7 @@ def main():
                 print(row)
                 PatientID_results.append(row['PatientID'])
                 BreastVolume_results.append(row['BreastVolumeCm3'])
-                MammographyView_results.append(row['View'])
+                MammographyView_results.append(row['MammographyView'])
 
                 F = None
                 T = None
@@ -180,7 +180,7 @@ def main():
                     T = row['ThicknessCm']
                     RecordedThickness_results.append(T)
 
-                data = MPACT(row['BreastVolumeCm3'], row['View'], F, T, args.S)
+                data = MPACT(row['BreastVolumeCm3'], row['MammographyView'], F, T, args.S)
                 # data = [ T, Tmin, Tmax, classification, Sscore]
 
                 Thickness_results.append(data[0])
@@ -193,7 +193,7 @@ def main():
                     Sscore_results.append(data[4])
 
         else:
-            print("M-PACT csv requires of, at least, columns 'PatientID','BreastVolumeCm3', and 'View' ")
+            print("M-PACT csv requires of, at least, columns 'PatientID','BreastVolumeCm3', and 'MammographyView' ")
             return 0
     else:
         """
@@ -248,8 +248,12 @@ def main():
 
     ## Recording dataframe
     if args.output is not None:
-        resultsDF.to_csv(args.output, index=False)
-        print(f"Results saved into {args.output}")
+        if args.output.endswith('.csv'):
+            resultsDF.to_csv(args.output, index=False)
+            print(f"Results saved into {args.output }")
+        else:
+            resultsDF.to_csv(args.output+'.csv', index=False)
+            print(f"Results saved into {args.output+'.csv'}")
 
     """
         VISUALIZATION

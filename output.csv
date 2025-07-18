@@ -1,0 +1,7 @@
+PatientID,MammographyView,BreastVolumeCm3,CompressionForceN,RecordedThicknessCm,ExpectedThicknessCm,MinThicknessIntervalCm,MaxThicknessIntervalCm,S-score,Classification,Messages
+A_001,CC,100,25,2,5.09,4.2756,5.9044,-7.588408644400785,Potentially overcompressed,"['Breast volume out of range. Expected values between [102.10, 1933.59] cm³', 'Compression Force out of range. Expected forces in range [50, 200] N']"
+A_002,MLO,300,35,3,6.865522407052816,5.629728373783309,8.101316440322321,-6.2559331134265275,Potentially overcompressed,"['Compression Force out of range. Expected forces in range [50, 200] N']"
+A_003,CC,500,150,5,4.746711460950591,3.987237627198496,5.506185294702685,0.6670105744079837,Within the normal range,[]
+A_004,MLO,1000,200,6,5.579086438149609,4.57485087928268,6.583321997016538,0.8382765540095073,Within the normal range,[]
+A_005,CC,1500,250,8,5.975494793282861,5.0194156263576035,6.931573960208119,4.235015837083722,Potentially undercompressed,"['Compression Force out of range. Expected forces in range [50, 200] N']"
+A_006,MLO,1500,250,8,5.976050921576711,4.900361755692903,7.0517400874605185,3.7630742088219726,Potentially undercompressed,"['Compression Force out of range. Expected forces in range [50, 200] N']"

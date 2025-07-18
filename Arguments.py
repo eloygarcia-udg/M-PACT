@@ -3,7 +3,7 @@ import argparse
 
 
 terms = {'ID':'Patient ID or image name','use_csv':'Use csv file', 'BV':'Breast Volume (cm3)', 'V':'Mammography projection',
-         'F':'Compression Force (N)', 'T':'Recorded Breast Thickness (cm)', 'S':'Sigma threshold for classification',
+         'F':'Compression Force (N)', 'T':'Recorded Breast Thickness (cm)', 'S':'Sigma threshold',
          'vis':'Visualization','output':'Output file'}
 
 def csv_parser(parser):
@@ -26,7 +26,7 @@ def terminal_parser(parser):
     ## Required
     parser.add_argument('--BreastVolume', '-BV', dest='BV', type=int,
                         help='Breast volume in cubic centimeters', required=True)
-    parser.add_argument('--MammoView', '-V', dest='V', type=str,
+    parser.add_argument('--MammographyView', '-V', dest='V', type=str,
                         choices=('CC', 'MLO'), help='Mammography view. Only "CC" and "MLO" views are available', required=True)
 
     ## Optional
