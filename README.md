@@ -1,4 +1,5 @@
 # M-PACT: Mammography Pressure and Compression tracking for Quality Control
+<div style="text-align: justify;">
 
 >:warning: **This is a preliminary version of the M-PACT software! (only for revision)**
 > 
@@ -231,3 +232,4 @@ compression force (between 50 and 200 N) may obtain incorrect results which may 
 }
 
 ````
+</div>
