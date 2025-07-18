@@ -5,7 +5,7 @@ global msg
 
 terms = {'ID':'Patient ID or image name','use_csv':'Use csv file', 'BV':'Breast Volume (cm3)', 'V':'Mammography projection',
          'F':'Compression Force (N)', 'T':'Recorded Breast Thickness (cm)', 'S':'Sigma threshold',
-         'vis':'Visualization','output':'Output file'}
+         'vis':'Visualization','output':'Output file', 'save_figure':'Output image file'}
 
 def csv_parser(parser):
     #parser = argparse.ArgumentParser(description="MPACT: Mammography Pressure and Compression tracking for Quality Control (v.0.1)")
@@ -15,6 +15,7 @@ def csv_parser(parser):
     parser.add_argument('--Sigma', '-S', dest='S', type=float, default=2,
                         help='Sigma Threshold (default:2)')
     parser.add_argument('--visualization', dest='vis', action='store_true', default=False)
+    parser.add_argument('--save_figure', dest='save_figure', default=None, type=str, help='File path')
 
     args = parser.parse_args()
     return args
@@ -37,7 +38,9 @@ def terminal_parser(parser):
                         help='Breast thickness, in centimeters (cm), during the mammography acquisition')
     parser.add_argument('--Sigma', '-S', dest='S', type=float, default=2,
                         help='Sigma Threshold (default:2)')
+
     parser.add_argument('--visualization', dest='vis', action='store_true', default=False)
+    parser.add_argument('--save_figure', dest='save_figure', default=None, type=str, help='File path')
 
     args = parser.parse_args()
     return args

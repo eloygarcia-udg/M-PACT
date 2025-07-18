@@ -9,10 +9,10 @@ from MPACT import compute_thickness
 global msg
 
 
-def one_view (df):
+def one_view (df, save_fig=None):
     view = np.unique(np.unique(df['MammographyView']))[0]
 
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=(8,8))
 
     colours = np.array(['green']*len(df.index))
     colours[df['S-score'] < -2.0] = 'red'
@@ -52,13 +52,23 @@ def one_view (df):
         ax.title.set_text(f"Mammography view {view}")
         ax.set_ylabel("Thickness (cm)")
         ax.set_xlabel("Breast Volume / Compression Force (cm³ / N)")
-    plt.show()
+
+    if not save_fig == None:
+        if save_fig.endswith('.png'):
+            plt.savefig(save_fig)
+            print(f"Image saved at {save_fig}")
+        else:
+            plt.savefig(save_fig + '.png')
+            print(f"Image saved at {save_fig+'.png'}")
+    else:
+        plt.show()
 
 
-def two_views(df):
+
+def two_views(df, save_fig=None):
     views = np.unique(df['MammographyView'])
 
-    fig, ax = plt.subplots(ncols=len(views))
+    fig, ax = plt.subplots(ncols=len(views), figsize=(16,8))
     for i in range(len(views)):
         vi=views[i]
 
@@ -102,12 +112,21 @@ def two_views(df):
             ax[i].title.set_text(f"Mammography view {vi}")
             ax[i].set_ylabel("Thickness (cm)")
             ax[i].set_xlabel("Breast Volume / Compression Force (cm³ / N)")
-    plt.show()
+
+    if not save_fig == None:
+        if save_fig.endswith('.png'):
+            plt.savefig(save_fig)
+            print(f"Image saved at {save_fig}")
+        else:
+            plt.savefig(save_fig + '.png')
+            print(f"Image saved at {save_fig+'.png'}")
+    else:
+        plt.show()
 
 
-def visualization(df):
+def visualization(df, save_fig=None):
     views = np.unique(df['MammographyView'])
     if len(views)==1:
-        one_view(df)
+        one_view(df, save_fig)
     else:
-        two_views(df)
+        two_views(df, save_fig)

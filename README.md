@@ -205,7 +205,7 @@ Furthermore, we provide an option to visualize the processed data (just in the e
 distribution, as follows:
 
 ```commandline
-> python main.py --use_csv /M-PACT/test.csv --outputfile /M-PACT/output.csv --visualization
+> python main.py --use_csv ~/M-PACT/test.csv --outputfile ~/M-PACT/output.csv --visualization --save_figure ~/M-PACT/figures/Figure_1.png 
 ```
 obtaining the following figure:
 

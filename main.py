@@ -144,7 +144,7 @@ def main():
         VISUALIZATION
     """
     if len(RecordedThickness_results) > 0 and args.vis:
-        visualization(resultsDF)
+        visualization(resultsDF, args.save_figure)
 
 
 if __name__=='__main__':
