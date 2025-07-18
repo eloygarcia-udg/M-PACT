@@ -39,7 +39,7 @@ estimates the expected thicknes  by means of the equations derived from full-fie
 two standard deviations range obtained from the residual errors. 
 
 Function ```main()``` provides a simple interface between the terminal and  ```MPACT()```. A simple query for a breast 
-with volume of $1,000 cm^3$ under a *CC* compression is:
+with volume of 1,000 $cm^3$ under a *CC* compression is:
 
 ```commandline
 > python main.py --BreastVolume 1000 --MammographyView CC
@@ -65,7 +65,7 @@ Expected Thickness: 6.204 cm
 Expected Thickness range: [5.1, 7.31] cm
 ```
 
-As shown, the expected thickness range using two standard deviations varies between $5.1$ and $7.31 cm$
+As shown, the expected thickness range using two standard deviations varies between 5.1 and 7.31 $cm$
 
 We have to point out that FFDM-derived measures were obtained using the commercial software Volpara$^{TM}$ (v.1.5.11), 
 year 2013, which provides relevant metrics, such as total breast volume (cm3), contact area between the breast and 
@@ -74,7 +74,7 @@ may not held consistent across different versions, softwares or other methodolog
  Grossman disk, or 3D medical image modalities and depth cameras, as exposed in the paper.
 
 Incorporating compression force enables a more complete analysis. According to our data, compression forces typically
-fall between $50$ and $200N$. The compressed breast thickness can also be obtained as a function of the ratio between 
+fall between 50 and 200 N. The compressed breast thickness can also be obtained as a function of the ratio between 
 breast volume and applied force as exposed in the paper.  
 
 To incorporate the compression force into our analysis, we have to include options ```--CompressionForce'``` of ```-F```
@@ -157,8 +157,8 @@ S-score value: 0.53
 Within the normal range
 ```
 
-Categorizing the compression within the normal range. However, changing the compressed thickness value from $T=6.5cm$ 
-to $T=7.5cm$, we obtain.
+Categorizing the compression within the normal range. However, changing the compressed thickness value from $T=6.5$ cm 
+to $T=7.5$ cm, we obtain.
 
 ```commandline
 > python main.py -BV 1000 -V CC -F 150 -T 7.5
@@ -217,8 +217,8 @@ As shown, compressed breast thickness (cm) is presented against the volume divid
 by the compression force (cm3/N) for both CC and MLO compressions. Green and red shaded areas represent the boundaries
 of the normal distribution of the residual errors with two and three standard deviations. Therefore, green points 
 represent values within the normal range, while blue and red points corresponds to potentially undercompressed and 
-overcompressed mammograms, respectively.  Values out of range in both BV (from $102.10$ to $1933.59 cm^3$) and
-compression force (between $50$ and $200 N$) may obtain incorrect results which may yield to a wrong representation.
+overcompressed mammograms, respectively.  Values out of range in both BV (from 102.10 to 1,933.59 $cm^3$) and
+compression force (between 50 and 200 N) may obtain incorrect results which may yield to a wrong representation.
 
 ## Reference
 
